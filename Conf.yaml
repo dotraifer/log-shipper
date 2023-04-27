@@ -1,0 +1,13 @@
+﻿input: 
+    type: tail
+    path: C:\Users\dotan\log-shipper-test
+
+
+parser:
+    type: regex
+
+filter:
+    type: modify
+    
+output:
+    type: stdout    
