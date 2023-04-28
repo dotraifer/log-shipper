@@ -14,11 +14,13 @@ namespace log_shipper
     {
         private DateTime Date { get; set; }
         private string Tag { get; set; }
-        private readonly Dictionary<string, object> LogData = new Dictionary<string, object>();
+        public readonly Dictionary<string, object> LogData = new Dictionary<string, object>();
         public Event(string tag)
         {
             this.Tag = tag;
             this.Date = System.DateTime.Now;
         }
+
+        
     }
 }

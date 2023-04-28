@@ -27,7 +27,9 @@ namespace log_shipper
                 string propertyName = property.Key;
                 object propertyValue = property.Value;
 
-                Pipeline pipeline = PipelineFactory.CreatePipeline(propertyName, propertyValue);
+                PipelineFactory pipelineFactory = new PipelineFactory();
+
+                Pipeline pipeline = pipelineFactory.Create(propertyName, propertyValue);
                 this.InitPipelines(propertyName, pipeline);
             }
             this.DeterminateChainOfPipelines();

@@ -1,5 +1,7 @@
 ﻿using log_shipper.pipeline;
+using log_shipper.pipeline.pipelines;
 using Serilog;
+using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace log_shipper.plugins.input.plugins
 {
-    public class Tail : IInputable
+    public class Tail : Input
     {
         protected string path;
-        public Tail(string path)
+        public Tail(Dictionary<object,object> pipelineConfiguration) : base(pipelineConfiguration)
         {
-            this.path = path;
+            this.path = (string)pipelineConfiguration["path"];
         }
 
-        public async Task Run()
+        public override async Task Run(Event logEvent)
         {
             await MonitorLogFileAsync();
         }
@@ -37,6 +39,13 @@ namespace log_shipper.plugins.input.plugins
                         var line = await streamReader.ReadLineAsync();
                         if (line != null)
                         {
+                            Event logEvent = new Event((string)this.PipelineConfiguration["Tag"]);
+                            logEvent.LogData.Add("Log", (string)line);
+                            Log.Debug("log sent to next pipeline");
+                            foreach (var pipeline in this.NextPipelines)
+                            {
+                                await pipeline.Run(logEvent);
+                            }
                             Log.Debug(line + " parsed success");
                             
                         }

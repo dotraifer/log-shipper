@@ -7,19 +7,10 @@ using System.Threading.Tasks;
 
 namespace log_shipper.pipeline.pipelines
 {
-    public class Filter : Pipeline
+    public abstract class Filter : Pipeline
     {
-        public Filter(object pipelineConfiguration) : base(pipelineConfiguration)
+        public Filter(Dictionary<object, object> pipelineConfiguration) : base(pipelineConfiguration)
         {
-        }
-        public override async Task Run(Event eventLog)
-        {
-            await Console.Out.WriteLineAsync("filter");
-            foreach (var next in nextPipelines)
-            {
-                await next.Run(eventLog);
-            }
-            await Task.WhenAll();
         }
     }
 }

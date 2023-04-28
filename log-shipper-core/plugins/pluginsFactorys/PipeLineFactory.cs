@@ -1,4 +1,5 @@
 ﻿using log_shipper.pipeline.pipelines;
+using log_shipper.plugins.input;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace log_shipper.pipeline
 {
-    public static class PipelineFactory
+    public class PipelineFactory
     {
         /// <summary>
         /// create pipeline object method
@@ -17,18 +18,24 @@ namespace log_shipper.pipeline
         /// <param name="pipelineConfiguration">the pipeline object configuration</param>
         /// <returns>pipeline object</returns>
         /// <exception cref="ArgumentException">if the pipeline type specified is unfamillier</exception>
-        public static Pipeline CreatePipeline(string pipelineType, object pipelineConfiguration)
+        public Pipeline Create(string pipelineType, object pipelineConfiguration)
         {
+            Dictionary<object, object> properties = (Dictionary<object, object>)pipelineConfiguration;
+            string pluginType = (string)properties["type"];
             switch (pipelineType.ToLower())
             {
                 case "input":
-                    return new Input(pipelineConfiguration);
+                    InputFactory inputFactory = new InputFactory();
+                    return inputFactory.Create(pluginType, properties);
                 case "parser":
-                    return new Parser(pipelineConfiguration);
+                    ParserFactory parserFactory = new ParserFactory();
+                    return parserFactory.Create(pluginType, properties);
                 case "filter":
-                    return new Filter(pipelineConfiguration);
+                    FilterFactory filterFactory = new FilterFactory();
+                    return filterFactory.Create(pluginType, properties);
                 case "output":
-                    return new Output(pipelineConfiguration);
+                    OutputFactory outputFactory = new OutputFactory();
+                    return outputFactory.Create(pluginType, properties);
                 default:
                     Log.Error("Invalid pipeline type specified : {0}.", pipelineType.ToLower());
                     throw new ArgumentException("Invalid pipeline type specified.");

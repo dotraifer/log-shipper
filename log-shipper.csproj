@@ -14,10 +14,4 @@
     <PackageReference Include="YamlDotNet" Version="13.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="log-shipper-core\plugins\filter\" />
-    <Folder Include="log-shipper-core\plugins\output\" />
-    <Folder Include="log-shipper-core\plugins\parser\" />
-  </ItemGroup>
-
 </Project>
