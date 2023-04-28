@@ -34,7 +34,6 @@ namespace log_shipper
             catch (FileNotFoundException ex) 
             {
                 Log.Error("configuration file not fount in {0} ", YamlFilePath);
-                throw new FileNotFoundException("configuration file not fount in {0} ", YamlFilePath);
             }
 
         }
