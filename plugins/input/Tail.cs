@@ -10,11 +10,16 @@ namespace log_shipper.plugins.input
 {
     public class Tail
     {
-        public async Task MonitorLogFileAsync(string filePath)
+        protected string path;
+        public Tail(string path)
+        {
+           this.path = path;
+        }
+        public async Task MonitorLogFileAsync()
         {
             long lastPosition = 0;
 
-            using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var fileStream = new FileStream(this.path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var streamReader = new StreamReader(fileStream))
             {
                 while (true)
