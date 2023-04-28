@@ -11,9 +11,14 @@ namespace log_shipper.pipeline
     {
         protected List<Pipeline> nextPipelines { get; set; }
         protected Object PipelineConfiguration { get; set; }
+        public void AddNextLogger(Pipeline nextPipeline)
+        {
+            this.nextPipelines.Add(nextPipeline);
+        }
         protected Pipeline(Object pipelineConfiguration) 
         {
             this.PipelineConfiguration = pipelineConfiguration;
+            this.nextPipelines = new List<Pipeline>();
         }
 
         public abstract void Run();

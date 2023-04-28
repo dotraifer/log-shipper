@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Xml.Linq;
+using YamlDotNet.Core;
 
 namespace log_shipper
 {
@@ -39,12 +40,46 @@ namespace log_shipper
                         break;
                 }
             }
-        }   
-        public  void Execute() 
+            this.DeterminateChainOfPipelines();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void DeterminateChainOfPipelines()
         {
-            foreach(var input in this.inputs)
+            DeterminaiteInputsChain();
+            DeterminiteParsersChain();
+            DeterminiteFiltersChain();
+        }
+
+        public void DeterminaiteInputsChain()
+        {
+            foreach (var input in this.inputs)
             {
-                input.Run();
+                // all the inputs will always send to first parser
+                input.AddNextLogger(this.parsers[0]);
+            }
+        }
+
+        public void DeterminiteParsersChain()
+        {
+            for (int i = 0; i < this.parsers.Count - 1; i++)
+            {
+                parsers[i].AddNextLogger(parsers[i + 1]);
+            }
+            parsers[parsers.Count - 1].AddNextLogger(this.filters[0]);
+        }
+
+        public void DeterminiteFiltersChain()
+        {
+            for (int i = 0; i < this.filters.Count - 1; i++)
+            {
+                filters[i].AddNextLogger(filters[i + 1]);
+            }
+
+            foreach (var output in this.outputs)
+            {
+                filters[filters.Count - 1].AddNextLogger(output);
             }
         }
     }

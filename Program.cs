@@ -16,7 +16,6 @@ namespace LogShipper
             Log.Information("log shipper started");
 
             PipelineExecuter pe = new PipelineExecuter();
-            pe.Execute();
         }
     }
 }
