@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace log_shipper.pipeline
 {
-    internal class InputPipe : IRunnable
+    public class Parser : IPipeline
     {
-        public async void Run()
+        public void Run()
         {
-            await Console.Out.WriteLineAsync("or");
+            throw new NotImplementedException();
         }
     }
 }

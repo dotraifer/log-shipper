@@ -14,13 +14,15 @@ namespace log_shipper
 {
     class Utils
     {
-        public static void YamlParser(string YamlFilePath)
+        public static ExpandoObject YamlParser(string YamlFilePath)
         {
 
             // Deserialize the YAML file into a dynamic object
             var deserializer = new DeserializerBuilder().Build();
             var yamlString = File.ReadAllText(YamlFilePath);
             var dynamicObject = deserializer.Deserialize<ExpandoObject>(yamlString);
+            return dynamicObject;
+            /*
             foreach (var property in dynamicObject)
             {
                 string propertyName = property.Key;
@@ -35,6 +37,7 @@ namespace log_shipper
 
                 // Do something with the property and its value
             }
+            */
         }
     }
 }

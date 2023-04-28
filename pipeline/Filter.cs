@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace log_shipper.pipeline
 {
-    internal interface IRunnable
+    public class Filter : IPipeline
     {
-        void Run();
+        public void Run()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
