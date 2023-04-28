@@ -38,7 +38,7 @@ namespace log_shipper.plugins.input.plugins
                         if (line != null)
                         {
                             Log.Debug(line + " parsed success");
-                            await Console.Out.WriteLineAsync(line.ToString());
+                            
                         }
                     }
 
