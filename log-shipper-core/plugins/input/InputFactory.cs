@@ -1,4 +1,5 @@
 ﻿using log_shipper.pipeline;
+using log_shipper.plugins.input.plugins;
 using Serilog;
 using System;
 using System.Collections.Generic;

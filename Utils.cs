@@ -9,6 +9,7 @@ using System.IO;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Reflection;
+using Serilog;
 
 namespace log_shipper
 {
@@ -24,9 +25,18 @@ namespace log_shipper
 
             // Deserialize the YAML file into a dynamic object
             var deserializer = new DeserializerBuilder().Build();
-            var yamlString = File.ReadAllText(YamlFilePath);
-            var dynamicObject = deserializer.Deserialize<ExpandoObject>(yamlString);
-            return dynamicObject;
+            try
+            {
+                var yamlString = File.ReadAllText(YamlFilePath);
+                var dynamicObject = deserializer.Deserialize<ExpandoObject>(yamlString);
+                return dynamicObject;
+            }
+            catch (FileNotFoundException ex) 
+            {
+                Log.Error("configuration file not fount in {0} ", YamlFilePath);
+                throw new FileNotFoundException("configuration file not fount in {0} ", YamlFilePath);
+            }
+
         }
     }
 }

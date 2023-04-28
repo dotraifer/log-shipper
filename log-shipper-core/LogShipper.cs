@@ -21,7 +21,7 @@ namespace log_shipper
         private readonly List<Pipeline> outputs = new List<Pipeline>();
         public LogShipper() {
             ExpandoObject
-                keyValuePairs = Utils.YamlParser("C:\\Users\\dotan\\source\\repos\\log-shipper\\Conf.yaml");
+                keyValuePairs = Utils.YamlParser("C:\\Users\\dotan\\source\\repos\\log-shipper\\configuration\\Co.yaml");
             foreach (var property in keyValuePairs)
             {
                 string propertyName = property.Key;

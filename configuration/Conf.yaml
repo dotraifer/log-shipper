@@ -1,6 +1,6 @@
 ﻿input: 
     type: tail
-    path: C:\Users\dotan\log-shipper-test\log.txt
+    path: C:\Users\dotan\source\repos\log-shipper\configuration\Conf.yaml
 
 
 parser:
