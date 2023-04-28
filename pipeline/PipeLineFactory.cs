@@ -9,6 +9,13 @@ namespace log_shipper.pipeline
 {
     public static class PipelineFactory
     {
+        /// <summary>
+        /// create pipeline object method
+        /// </summary>
+        /// <param name="pipelineType">the pipeline type(Input, Parser, Filter, Output)</param>
+        /// <param name="pipelineConfiguration">the pipeline object configuration</param>
+        /// <returns>pipeline object</returns>
+        /// <exception cref="ArgumentException">if the pipeline type specified is unfamillier</exception>
         public static Pipeline CreatePipeline(string pipelineType, object pipelineConfiguration)
         {
             switch (pipelineType.ToLower())

@@ -1,4 +1,6 @@
 ﻿
+using log_shipper;
+using log_shipper.pipeline;
 using Serilog;
 using System;
 using System.Collections.Generic;

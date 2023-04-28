@@ -33,7 +33,9 @@ namespace log_shipper
             this.DeterminateChainOfPipelines();
         }
 
-
+        /// <summary>
+        /// Start the log shipper pipeline
+        /// </summary>
         public void Start()
         {
             foreach(var input in this.inputs)

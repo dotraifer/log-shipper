@@ -10,6 +10,14 @@ namespace log_shipper.plugins.input
 {
     public class InputFactory
     {
+        /// <summary>
+        /// Factory method for crating an input plugin
+        /// </summary>
+        /// <param name="pluginType">the plugin type</param>
+        /// <example>tail</example>
+        /// <param name="pipelineConfiguration">Dict of the input pipeline configuration</param>
+        /// <returns>IInputable object</returns>
+        /// <exception cref="ArgumentException">If the type is not familier</exception>
         public static IInputable CreateInput(string pluginType, Dictionary<object, object> pipelineConfiguration)
         {
             switch (pluginType.ToLower())

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace log_shipper
 {
+    /// <summary>
+    /// Object reprasanting an event message
+    /// </summary>
     public class Event
     {
         private DateTime Date { get; set; }

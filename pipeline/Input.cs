@@ -9,15 +9,20 @@ using System.Threading.Tasks;
 
 namespace log_shipper.pipeline
 {
+    /// <summary>
+    /// Input pipeline object
+    /// </summary>
     public class Input : Pipeline
     {
         public Input(object pipelineConfiguration) : base(pipelineConfiguration)
         {
         }
-
+        /// <summary>
+        /// Run async the Input plugin
+        /// </summary>
+        /// <param name="eventLog">The log object</param>
         public override async Task Run(Event eventLog)
         {
-            //await Console.Out.WriteLineAsync(this.PipelineConfiguration);
             IInputable plugin = InputFactory.CreateInput(this.type, this.PipelineConfiguration);
             Log.Information("input plugin created - start running...");
             await plugin.Run();
