@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log_shipper.plugins.input;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -13,9 +14,21 @@ namespace log_shipper.pipeline
         {
         }
 
-        public override void Run()
+        public override async Task Run(Event eventLog)
         {
-            Console.WriteLine("hellow");
+            Tail tail = new Tail();
+            await tail.MonitorLogFileAsync("C:\\Users\\dotan\\log-shipper-test\\log.txt");
+
+            /*await Console.Out.WriteLineAsync("input");
+            eventLog = new Event("TAG");
+            await Console.Out.WriteLineAsync("ara");
+            await Console.Out.WriteLineAsync(eventLog.ToString());
+            foreach (var next in nextPipelines)
+            {
+                await Task.Run(() => next.Run(eventLog));
+            }
+            await Task.WhenAll();
+            */
         }
     }
 }

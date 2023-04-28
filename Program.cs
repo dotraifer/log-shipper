@@ -15,8 +15,12 @@ namespace LogShipper
             .CreateLogger();
             Log.Information("log shipper started");
 
+            Event eve = new Event("fgf");
+
             log_shipper.LogShipper pe = new log_shipper.LogShipper();
             pe.Start();
+
+
         }
     }
 }

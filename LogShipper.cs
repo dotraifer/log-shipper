@@ -36,7 +36,12 @@ namespace log_shipper
 
         public void Start()
         {
-            throw new NotImplementedException();
+            foreach(var input in this.inputs)
+            {
+                Log.Information("Started input from source ");
+                Task.Run(() => input.Run(null));
+                Console.ReadLine();
+            }
         }
 
         /// <summary>

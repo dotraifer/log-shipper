@@ -15,12 +15,12 @@ namespace log_shipper.pipeline
         {
             this.nextPipelines.Add(nextPipeline);
         }
-        protected Pipeline(Object pipelineConfiguration) 
+        protected Pipeline(Object pipelineConfiguration)
         {
             this.PipelineConfiguration = pipelineConfiguration;
             this.nextPipelines = new List<Pipeline>();
         }
 
-        public abstract void Run();
+        public abstract Task Run(Event eventLog);
     }
 }

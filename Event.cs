@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace log_shipper
 {
-    internal class Event
+    public class Event
     {
+        private DateTime Date { get; set; }
+        private string Tag { get; set; }
+        public Event(string tag)
+        {
+            this.Tag = tag;
+            this.Date = System.DateTime.Now;
+        }
     }
 }

@@ -14,9 +14,14 @@ namespace log_shipper.pipeline
         {
         }
 
-        public override void Run()
+        public override async Task Run(Event eventLog)
         {
-            throw new NotImplementedException();
+            await Console.Out.WriteLineAsync("parse");
+            foreach (var next in nextPipelines)
+            {
+                await next.Run(eventLog);
+            }
+            await Task.WhenAll();
         }
     }
 }
