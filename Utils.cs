@@ -27,22 +27,6 @@ namespace log_shipper
             var yamlString = File.ReadAllText(YamlFilePath);
             var dynamicObject = deserializer.Deserialize<ExpandoObject>(yamlString);
             return dynamicObject;
-            /*
-            foreach (var property in dynamicObject)
-            {
-                string propertyName = property.Key;
-                object propertyValue = property.Value;
-                Console.WriteLine(propertyName);
-                Dictionary<object, object> dictionary = (Dictionary<object, object>)propertyValue; // replace with your own code to get the dictionary
-
-                foreach (KeyValuePair<object, object> entry in dictionary)
-                {
-                    Console.WriteLine($"Key: {entry.Key}, Value: {entry.Value}");
-                }
-
-                // Do something with the property and its value
-            }
-            */
         }
     }
 }

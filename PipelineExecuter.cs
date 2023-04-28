@@ -47,9 +47,11 @@ namespace log_shipper
         /// </summary>
         public void DeterminateChainOfPipelines()
         {
+            Log.Debug("Pipeline chain determinate stated");
             DeterminaiteInputsChain();
             DeterminiteParsersChain();
             DeterminiteFiltersChain();
+            Log.Debug("Pipeline chain determinate ended succussefully");
         }
 
         public void DeterminaiteInputsChain()
