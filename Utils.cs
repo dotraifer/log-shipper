@@ -35,6 +35,7 @@ namespace log_shipper
             {
                 Log.Error("configuration file not fount in {0} ", YamlFilePath);
             }
+            return null;
 
         }
     }
