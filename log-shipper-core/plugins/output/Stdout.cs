@@ -1,4 +1,5 @@
 ﻿using log_shipper.pipeline.pipelines;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace log_shipper.log_shipper_core.plugins.output
         public Stdout(Dictionary<object, object> pipelineConfiguration) : base(pipelineConfiguration)
         {
         }
-        public override Task Run(Event eventLog)
+        public override async Task Run(Event eventLog)
         {
-            throw new NotImplementedException();
+            Log.Information("start stdout running");
         }
     }
 }

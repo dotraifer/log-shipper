@@ -1,4 +1,6 @@
 ﻿using log_shipper.pipeline.pipelines;
+using Serilog;
+using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +14,13 @@ namespace log_shipper.log_shipper_core.plugins.parser
         public RegEx(Dictionary<object, object> pipelineConfiguration) : base(pipelineConfiguration)
         {
         }
-        public override Task Run(Event eventLog)
+        public override async Task Run(Event eventLog)
         {
-            throw new NotImplementedException();
+            Log.Information("start parser running");
+            foreach (var pipeline in this.NextPipelines)
+            {
+                await pipeline.Run(eventLog);
+            }
         }
     }
 }

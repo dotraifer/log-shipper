@@ -1,6 +1,7 @@
 ﻿input: 
     type: tail
     path: C:\Users\dotan\log-shipper-test\log.txt
+    tag: file
 
 
 parser:

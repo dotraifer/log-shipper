@@ -39,12 +39,19 @@ namespace log_shipper.plugins.input.plugins
                         var line = await streamReader.ReadLineAsync();
                         if (line != null)
                         {
-                            Event logEvent = new Event((string)this.PipelineConfiguration["Tag"]);
+                            Event logEvent = new Event((string)this.PipelineConfiguration["tag"]);
                             logEvent.LogData.Add("Log", (string)line);
                             Log.Debug("log sent to next pipeline");
                             foreach (var pipeline in this.NextPipelines)
                             {
-                                await pipeline.Run(logEvent);
+                                try { 
+                                    await pipeline.Run(logEvent); 
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log.Error("failed to send to parser");
+                                }
+  
                             }
                             Log.Debug(line + " parsed success");
                             
