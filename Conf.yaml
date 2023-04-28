@@ -1,6 +1,6 @@
 ﻿input: 
     type: tail
-    path: C:\Users\dotan\log-shipper-test
+    path: C:\Users\dotan\log-shipper-test\log.txt
 
 
 parser:

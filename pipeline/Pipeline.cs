@@ -20,8 +20,7 @@ namespace log_shipper.pipeline
         protected Pipeline(object pipelineConfiguration)
         {
             this.PipelineConfiguration = (Dictionary<object, object>)pipelineConfiguration;
-            type = (string)PipelineConfiguration["type"];
-            Console.WriteLine(this.type);
+            this.type = (string)PipelineConfiguration["type"];
             this.nextPipelines = new List<Pipeline>();
         }
 

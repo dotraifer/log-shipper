@@ -38,7 +38,6 @@ namespace log_shipper
         {
             foreach(var input in this.inputs)
             {
-                Log.Information("Started input from source ");
                 Task.Run(() => input.Run(null));
                 Console.ReadLine();
             }

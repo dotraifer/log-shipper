@@ -8,6 +8,6 @@ namespace log_shipper.plugins.input
 {
     public interface IInputable
     {
-        public void Run();
+        public Task Run();
     }
 }

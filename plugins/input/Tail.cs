@@ -8,12 +8,17 @@ using System.Threading.Tasks;
 
 namespace log_shipper.plugins.input
 {
-    public class Tail
+    public class Tail : IInputable 
     {
         protected string path;
         public Tail(string path)
         {
            this.path = path;
+        }
+
+        public async Task Run()
+        {
+            await this.MonitorLogFileAsync();
         }
         public async Task MonitorLogFileAsync()
         {
@@ -22,6 +27,7 @@ namespace log_shipper.plugins.input
             using (var fileStream = new FileStream(this.path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var streamReader = new StreamReader(fileStream))
             {
+                Log.Information("started reading from {0} ", this.path);
                 while (true)
                 {
                     fileStream.Seek(lastPosition, SeekOrigin.Begin);
@@ -31,7 +37,7 @@ namespace log_shipper.plugins.input
                         var line = await streamReader.ReadLineAsync();
                         if (line != null)
                         {
-                            await Console.Out.WriteLineAsync(line);
+                            Log.Debug(line + " parsed success");
                         }
                     }
 

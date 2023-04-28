@@ -1,4 +1,5 @@
 ﻿using log_shipper.plugins.input;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -17,8 +18,9 @@ namespace log_shipper.pipeline
         public override async Task Run(Event eventLog)
         {
             //await Console.Out.WriteLineAsync(this.PipelineConfiguration);
-            Tail tail = new Tail();
-            await tail.MonitorLogFileAsync("C:\\Users\\dotan\\log-shipper-test\\log.txt");
+            IInputable plugin = InputFactory.CreateInput(this.type, this.PipelineConfiguration);
+            Log.Information("input plugin created - start running...");
+            await plugin.Run();
         }
     }
 }
