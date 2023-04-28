@@ -16,7 +16,8 @@ namespace log_shipper.log_shipper_core.plugins.parser
         }
         public override async Task Run(Event eventLog)
         {
-            Log.Information("start parser running");
+            eventLog.LogData.Add("parser", "hey");
+            Log.Debug("start parser running");
             foreach (var pipeline in this.NextPipelines)
             {
                 await pipeline.Run(eventLog);

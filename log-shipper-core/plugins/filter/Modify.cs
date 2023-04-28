@@ -15,11 +15,15 @@ namespace log_shipper.log_shipper_core.plugins.filter
         }
         public override async Task Run(Event eventLog)
         {
-            Log.Information("start modify running");
+            Log.Debug("start modify running");
+            eventLog.LogData.Add("app", "test");
+
             foreach (var pipeline in this.NextPipelines)
             {
                 await pipeline.Run(eventLog);
             }
         }
+
+
     }
 }
