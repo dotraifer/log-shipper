@@ -1,6 +1,4 @@
-﻿
-using log_shipper;
-using log_shipper.pipeline;
+﻿using log_shipper.pipeline;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -8,28 +6,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.plugins.input
+namespace log_shipper.plugins.input.plugins
 {
-    public class Tail : IInputable 
+    public class Tail : IInputable
     {
         protected string path;
         public Tail(string path)
         {
-           this.path = path;
+            this.path = path;
         }
 
         public async Task Run()
         {
-            await this.MonitorLogFileAsync();
+            await MonitorLogFileAsync();
         }
         public async Task MonitorLogFileAsync()
         {
             long lastPosition = 0;
 
-            using (var fileStream = new FileStream(this.path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var streamReader = new StreamReader(fileStream))
             {
-                Log.Information("started reading from {0} ", this.path);
+                Log.Information("started reading from {0} ", path);
                 while (true)
                 {
                     fileStream.Seek(lastPosition, SeekOrigin.Begin);

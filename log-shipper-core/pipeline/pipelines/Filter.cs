@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.pipeline
+namespace log_shipper.pipeline.pipelines
 {
     public class Filter : Pipeline
     {

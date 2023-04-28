@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -15,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="plugins\filter\" />
-    <Folder Include="plugins\output\" />
-    <Folder Include="plugins\parser\" />
+    <Folder Include="log-shipper-core\plugins\filter\" />
+    <Folder Include="log-shipper-core\plugins\output\" />
+    <Folder Include="log-shipper-core\plugins\parser\" />
   </ItemGroup>
 
 </Project>
