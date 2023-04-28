@@ -14,6 +14,11 @@ namespace log_shipper
 {
     class Utils
     {
+        /// <summary>
+        /// parsing a yaml file to a dynamic object
+        /// </summary>
+        /// <param name="YamlFilePath">path to the yaml configuration file</param>
+        /// <returns>the dynamic object - ExpandoObject</returns>
         public static ExpandoObject YamlParser(string YamlFilePath)
         {
 

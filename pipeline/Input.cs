@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace log_shipper.pipeline
 {
-    public class Input : IPipeline
+    public class Input : Pipeline
     {
-        public async void Run()
+        public Input(object pipelineConfiguration) : base(pipelineConfiguration)
         {
-            await Console.Out.WriteLineAsync("or");
+        }
+
+        public override void Run()
+        {
+            Console.WriteLine("hellow");
         }
     }
 }

@@ -9,18 +9,18 @@ namespace log_shipper.pipeline
 {
     public static class PipelineFactory
     {
-        public static IPipeline CreatePipeline(string pipelineType)
+        public static Pipeline CreatePipeline(string pipelineType, Object pipelineConfiguration)
         {
             switch (pipelineType.ToLower())
             {
                 case "input":
-                    return new Input();
+                    return new Input(pipelineConfiguration);
                 case "parser":
-                    return new Parser();
+                    return new Parser(pipelineConfiguration);
                 case "filter":
-                    return new Filter();
+                    return new Filter(pipelineConfiguration);
                 case "output":
-                    return new Output();
+                    return new Output(pipelineConfiguration);
                 default:
                     Log.Error("Invalid pipeline type specified : {0}.", pipelineType.ToLower());
                     throw new ArgumentException("Invalid pipeline type specified.");

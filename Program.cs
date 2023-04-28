@@ -14,9 +14,9 @@ namespace LogShipper
                 Console()
             .CreateLogger();
             Log.Information("log shipper started");
-            Utils.YamlParser("C:\\Users\\dotan\\source\\repos\\log-shipper\\Conf.yaml");
 
-            IPipeline pipeline = PipelineFactory.CreatePipeline("InPut");
+            PipelineExecuter pe = new PipelineExecuter();
+            pe.Execute();
         }
     }
 }
