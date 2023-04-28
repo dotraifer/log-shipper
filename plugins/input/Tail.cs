@@ -12,20 +12,26 @@ namespace log_shipper.plugins.input
     {
         public async Task MonitorLogFileAsync(string filePath)
         {
+            long lastPosition = 0;
+
             using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var streamReader = new StreamReader(fileStream))
             {
                 while (true)
                 {
-                    var line = await streamReader.ReadLineAsync();
-                    if (line != null)
+                    fileStream.Seek(lastPosition, SeekOrigin.Begin);
+
+                    while (!streamReader.EndOfStream)
                     {
-                        // Process the log line asynchronously
+                        var line = await streamReader.ReadLineAsync();
+                        if (line != null)
+                        {
+                            await Console.Out.WriteLineAsync(line);
+                        }
                     }
-                    else
-                    {
-                        await Task.Delay(1000); // Wait for new lines to be added
-                    }
+
+                    lastPosition = fileStream.Position;
+                    await Task.Delay(1000); // Wait for new lines to be added
                 }
             }
         }

@@ -21,6 +21,8 @@ namespace log_shipper.pipeline
             this.nextPipelines = new List<Pipeline>();
         }
 
+
+
         public abstract Task Run(Event eventLog);
     }
 }

@@ -10,7 +10,7 @@ namespace log_shipper.pipeline
 {
     public class Parser : Pipeline
     {
-        public Parser(object pipelineConfiguration) : base(pipelineConfiguration)
+        public Parser(Object pipelineConfiguration) : base(pipelineConfiguration)
         {
         }
 
