@@ -9,6 +9,7 @@ parser:
 
 filter:
     type: modify
+    add: name dotan
     
 output:
     type: stdout    
