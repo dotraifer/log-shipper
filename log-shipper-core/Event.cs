@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace log_shipper
     {
         private DateTime Date { get; set; }
         private string Tag { get; set; }
+        private readonly Dictionary<string, object> LogData = new Dictionary<string, object>();
         public Event(string tag)
         {
             this.Tag = tag;
