@@ -9,7 +9,7 @@ namespace log_shipper.pipeline
 {
     public static class PipelineFactory
     {
-        public static Pipeline CreatePipeline(string pipelineType, Object pipelineConfiguration)
+        public static Pipeline CreatePipeline(string pipelineType, object pipelineConfiguration)
         {
             switch (pipelineType.ToLower())
             {

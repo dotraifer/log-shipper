@@ -15,7 +15,7 @@ namespace log_shipper.pipeline
         {
             this.nextPipelines.Add(nextPipeline);
         }
-        protected Pipeline(Object pipelineConfiguration)
+        protected Pipeline(object pipelineConfiguration)
         {
             this.PipelineConfiguration = pipelineConfiguration;
             this.nextPipelines = new List<Pipeline>();
