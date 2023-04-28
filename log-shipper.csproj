@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="plugins\input\" />
     <Folder Include="plugins\filter\" />
     <Folder Include="plugins\output\" />
     <Folder Include="plugins\parser\" />
