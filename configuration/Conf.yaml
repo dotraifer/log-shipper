@@ -12,6 +12,10 @@ filter:
       add: 
         name: dotan
         age: dotan
+      set:
+        host: ${HOSTNAME}
+      remove:
+        - parser
     
 output:
     - type: stdout    
