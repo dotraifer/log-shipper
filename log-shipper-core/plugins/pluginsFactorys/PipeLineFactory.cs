@@ -20,26 +20,40 @@ namespace log_shipper.pipeline
         /// <exception cref="ArgumentException">if the pipeline type specified is unfamillier</exception>
         public Pipeline Create(string pipelineType, object pipelineConfiguration)
         {
-            Dictionary<object, object> properties = (Dictionary<object, object>)pipelineConfiguration;
-            string pluginType = (string)properties["type"];
-            switch (pipelineType.ToLower())
+            string pluginType;
+            List<Object> pipelineList = (List<Object>)pipelineConfiguration;
+            foreach (var pipeline in pipelineList)
             {
-                case "input":
-                    InputFactory inputFactory = new InputFactory();
-                    return inputFactory.Create(pluginType, properties);
-                case "parser":
-                    ParserFactory parserFactory = new ParserFactory();
-                    return parserFactory.Create(pluginType, properties);
-                case "filter":
-                    FilterFactory filterFactory = new FilterFactory();
-                    return filterFactory.Create(pluginType, properties);
-                case "output":
-                    OutputFactory outputFactory = new OutputFactory();
-                    return outputFactory.Create(pluginType, properties);
-                default:
-                    Log.Error("Invalid pipeline type specified : {0}.", pipelineType.ToLower());
-                    throw new ArgumentException("Invalid pipeline type specified.");
+                Dictionary<object, object> properties = (Dictionary<object, object>)pipeline;
+                try
+                {
+                    pluginType = (string)properties["type"];
+                }
+                catch
+                {
+                    Log.Error("Plugin wasn't noted");
+                    throw new Exception("Plugin wasn't noted");
+                }
+                switch (pipelineType.ToLower())
+                {
+                    case "input":
+                        InputFactory inputFactory = new InputFactory();
+                        return inputFactory.Create(pluginType, properties);
+                    case "parser":
+                        ParserFactory parserFactory = new ParserFactory();
+                        return parserFactory.Create(pluginType, properties);
+                    case "filter":
+                        FilterFactory filterFactory = new FilterFactory();
+                        return filterFactory.Create(pluginType, properties);
+                    case "output":
+                        OutputFactory outputFactory = new OutputFactory();
+                        return outputFactory.Create(pluginType, properties);
+                    default:
+                        Log.Error("Invalid pipeline type specified : {0}.", pipelineType.ToLower());
+                        throw new ArgumentException("Invalid pipeline type specified.");
+                }
             }
+            throw new Exception(String.Format("{0} pipeline didn't contain a list object", pipelineType));
         }
     }
 }

@@ -1,15 +1,17 @@
 ﻿input: 
-    type: tail
-    path: C:\Users\dotan\log-shipper-test\log.txt
-    tag: file
+    - type: tail
+      path: C:\Users\dotan\log-shipper-test\log.txt
+      tag: file
 
 
 parser:
-    type: regex
+    - type: regex
 
 filter:
-    type: modify
-    add: name dotan
+    - type: modify
+      add: 
+      - name: dotan
+      - age: dotan
     
 output:
-    type: stdout    
+    - type: stdout    

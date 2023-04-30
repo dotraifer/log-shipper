@@ -16,8 +16,14 @@ namespace log_shipper.log_shipper_core.plugins.filter
         public override async Task Run(Event eventLog)
         {
             Log.Debug("start modify running");
-            eventLog = await AddFilter(eventLog);
-            eventLog.LogData.Add("app", "test");
+            try
+            {
+                eventLog = await AddFilter(eventLog);
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.ToString());
+            }
 
             foreach (var pipeline in this.NextPipelines)
             {
@@ -27,20 +33,14 @@ namespace log_shipper.log_shipper_core.plugins.filter
 
         public async Task<Event> AddFilter(Event eventLog)
         {
-            string key = string.Empty;
-            string value = string.Empty;
             foreach(var field in this.PipelineConfiguration)
             {
-                if (field.Key.ToString().ToLower().Equals("add"))
+                await Console.Out.WriteLineAsync((string)field.Key);
+                if (((string)field.Key).ToLower().Equals("add"));
                 {
-                    string[] words = field.Value.ToString().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    // Split the string by space delimiter, and remove any empty substrings
-
-                    if (words.Length >= 2)
+                    foreach (var add in (Dictionary<string, string>)field.Value)
                     {
-                        key = words[0];
-                        value = words[1];
-                        eventLog.LogData.Add(key, value);
+                        eventLog.LogData.Add(add.Key, add.Value);
                     }
                 }
             }
