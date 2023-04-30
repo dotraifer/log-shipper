@@ -18,7 +18,7 @@ namespace log_shipper.log_shipper_core.plugins.filter
             Log.Debug("start modify running");
             try
             {
-                eventLog = AddFilter(eventLog);
+                eventLog = ModifyLog(eventLog);
             }
             catch (Exception ex)
             {
@@ -33,12 +33,12 @@ namespace log_shipper.log_shipper_core.plugins.filter
         }
 
         /// <summary>
-        /// Will call 
+        /// Will call the modify functions according to the configuration
         /// </summary>
-        /// <param name="eventLog"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public Event Modify(Event eventLog)
+        /// <param name="eventLog">the log to modify</param>
+        /// <returns>the log after modification</returns>
+        /// <exception cref="Exception">if an unknown modify labal configured</exception>
+        public Event ModifyLog(Event eventLog)
         {
             foreach (var field in this.PipelineConfiguration)
             {
@@ -65,7 +65,13 @@ namespace log_shipper.log_shipper_core.plugins.filter
             return eventLog;
         }
 
-        public Event Add(Event eventLog, object valuesToAdd)
+        /// <summary>
+        /// Implements the add label, will add a new key: value if he isn't already exist 
+        /// </summary>
+        /// <param name="eventLog">the log to add to</param>
+        /// <param name="valuesToAdd">dict of values to add if the keyToAdd: valueToAdd format</param>
+        /// <returns>the modified log</returns>
+        public static Event Add(Event eventLog, object valuesToAdd)
         {
             // TODO : ignore if value already exists
             Dictionary<object, object> keyValuesToAdd = (Dictionary<object, object>)valuesToAdd;
@@ -76,7 +82,14 @@ namespace log_shipper.log_shipper_core.plugins.filter
             return eventLog;
         }
 
-        public Event Set(Event eventLog, object valuesToSet)
+        /// <summary>
+        /// Implements the set label, will set a new key: value if he isn't already exist. 
+        /// if exist he'll override it
+        /// </summary>
+        /// <param name="eventLog">the log to add to</param>
+        /// <param name="valuesToAdd">dict of values to add if the keyToAdd: valueToAdd format</param>
+        /// <returns>the modified log</returns>
+        public static Event Set(Event eventLog, object valuesToSet)
         {
             Dictionary<object, object> keyValuesToSet = (Dictionary<object, object>)valuesToSet;
             foreach (var set in keyValuesToSet)
@@ -87,7 +100,13 @@ namespace log_shipper.log_shipper_core.plugins.filter
             return eventLog;
         }
 
-        public Event Remove(Event eventLog, object valuesToRemove)
+        /// <summary>
+        /// Implements the remove label, will remove a key
+        /// </summary>
+        /// <param name="eventLog">the log to remove key from</param>
+        /// <param name="valuesToAdd">dict of keys to remove</param>
+        /// <returns>the modified log</returns>
+        public static Event Remove(Event eventLog, object valuesToRemove)
         {
             List<object> listValuesToRemove = (List<object>)valuesToRemove;
             foreach (var remove in listValuesToRemove)
