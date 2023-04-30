@@ -42,7 +42,7 @@ namespace log_shipper
         {
             foreach(var input in this.inputs)
             {
-                Task.Run(() => input.Run(null));
+                Task.Run(() => input.Run(eventLog: null));
                 Console.ReadLine();
             }
         }

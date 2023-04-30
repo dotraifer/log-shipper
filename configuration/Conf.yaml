@@ -10,8 +10,8 @@ parser:
 filter:
     - type: modify
       add: 
-      - name: dotan
-      - age: dotan
+        name: dotan
+        age: dotan
     
 output:
     - type: stdout    

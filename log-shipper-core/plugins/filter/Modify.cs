@@ -33,14 +33,14 @@ namespace log_shipper.log_shipper_core.plugins.filter
 
         public async Task<Event> AddFilter(Event eventLog)
         {
-            foreach(var field in this.PipelineConfiguration)
+            foreach (var field in this.PipelineConfiguration)
             {
-                await Console.Out.WriteLineAsync((string)field.Key);
-                if (((string)field.Key).ToLower().Equals("add"));
+                if (((string)field.Key).ToLower().Equals("add"))
                 {
-                    foreach (var add in (Dictionary<string, string>)field.Value)
+                    Dictionary<object, object> keyValuesToAdd = (Dictionary<object, object>)field.Value;
+                    foreach (var add in keyValuesToAdd)
                     {
-                        eventLog.LogData.Add(add.Key, add.Value);
+                        eventLog.LogData.Add((string)add.Key, (string)add.Value);
                     }
                 }
             }
