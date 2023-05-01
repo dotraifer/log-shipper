@@ -21,6 +21,7 @@ namespace log_shipper.plugins.input.plugins
         public override async Task Run(Event logEvent)
         {
             await MonitorLogFileAsync();
+
         }
         public async Task MonitorLogFileAsync()
         {

@@ -2,6 +2,7 @@
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,8 +95,11 @@ namespace log_shipper.log_shipper_core.plugins.filter
             Dictionary<object, object> keyValuesToSet = (Dictionary<object, object>)valuesToSet;
             foreach (var set in keyValuesToSet)
             {
-                eventLog.LogData.Remove(((string)set.Key));
-                eventLog.LogData.Add((string)set.Key, (string)set.Value);
+                if (eventLog.LogData.ContainsKey((string)set.Key))
+                    eventLog.LogData[(string)set.Key] = (string)set.Value;
+                else
+                    eventLog.LogData.Add((string)set.Key, (string)set.Value);
+
             }
             return eventLog;
         }

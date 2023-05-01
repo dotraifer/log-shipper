@@ -21,7 +21,6 @@ namespace log_shipper.log_shipper_core.plugins.parser
         {
             try
             {
-                await Console.Out.WriteLineAsync("pae");
                 eventLog = RegexParser(eventLog);
             }
             catch (Exception ex)
@@ -56,9 +55,11 @@ namespace log_shipper.log_shipper_core.plugins.parser
                     GroupCollection groups = match.Groups;
                     foreach (Group group in groups)
                     {
-                        eventLog.LogData.Add(group.Name, group.Value);
+                        if (group.Name != "0")
+                            eventLog.LogData.Add(group.Name, group.Value);
                     }
                 }
+                eventLog.LogData.Remove("Log");
 
             } 
             catch (Exception ex) 
