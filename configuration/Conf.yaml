@@ -6,6 +6,7 @@
 
 parser:
     - type: regex
+      regex: '^(?<timestamp>\w+)\s+(?<severity>): (?<message>)$'
 
 filter:
     - type: modify
