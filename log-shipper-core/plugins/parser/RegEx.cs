@@ -33,6 +33,12 @@ namespace log_shipper.log_shipper_core.plugins.parser
             }
         }
 
+        /// <summary>
+        /// Parse a log with regex
+        /// </summary>
+        /// <param name="eventLog">the event of the log to parse</param>
+        /// <returns>the eventLog after parsing it</returns>
+        /// <exception cref="Exception"></exception>
         private Event RegexParser(Event eventLog)
         {
             string reg;
@@ -55,6 +61,7 @@ namespace log_shipper.log_shipper_core.plugins.parser
                     GroupCollection groups = match.Groups;
                     foreach (Group group in groups)
                     {
+                        // ignore the 0 group name
                         if (group.Name != "0")
                             eventLog.LogData.Add(group.Name, group.Value);
                     }
@@ -65,6 +72,7 @@ namespace log_shipper.log_shipper_core.plugins.parser
             catch (Exception ex) 
             {
                 Log.Error("Regex failed");
+                // TODO : Implement better
                 throw new Exception();
             }
             return eventLog;
