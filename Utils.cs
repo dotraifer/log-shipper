@@ -10,6 +10,7 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Reflection;
 using Serilog;
+using YamlDotNet.Serialization.NodeDeserializers;
 
 namespace log_shipper
 {
@@ -24,7 +25,7 @@ namespace log_shipper
         {
 
             // Deserialize the YAML file into a dynamic object
-            var deserializer = new DeserializerBuilder().Build();
+            var deserializer = new DeserializerBuilder().WithNodeDeserializer(inner => new EnvironmentVariableNodeDeserializer(inner), s => s.InsteadOf<ScalarNodeDeserializer>()).Build();
             try
             {
                 var yamlString = File.ReadAllText(YamlFilePath);
