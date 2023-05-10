@@ -34,9 +34,9 @@ public class EnvironmentVariableNodeDeserializer : INodeDeserializer
                 foreach (Match match in matches)
                 {
                     string envVarible = match.Value.Substring(2, (match.Value.Length) - 3);
-                    Console.WriteLine(Environment.GetEnvironmentVariable(envVarible));
-                    Console.WriteLine(envVarible);
-                    value = match.Value.Replace(envVarible, Environment.GetEnvironmentVariable(envVarible) ?? "NO_ENV_FOUND");
+                    Console.WriteLine(match.Value + " hello " + envVarible);
+                    value = ((string)value).Replace(match.Value, Environment.GetEnvironmentVariable(envVarible) ?? "NO_ENV_FOUND");
+                    Console.WriteLine(value);
                 }
             }
             return true;
