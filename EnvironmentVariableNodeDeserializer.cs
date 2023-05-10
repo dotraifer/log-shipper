@@ -1,4 +1,4 @@
-﻿using log_shipper.pipeline.pipelines;
+﻿using LogShipperProject.pipeline.pipelines;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;

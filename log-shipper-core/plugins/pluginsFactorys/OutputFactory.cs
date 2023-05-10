@@ -1,8 +1,8 @@
-﻿using log_shipper.log_shipper_core.plugins.output;
-using log_shipper.log_shipper_core.plugins.pluginsFactorys;
+﻿using LogShipperProject.log_shipper_core.plugins.output;
+using LogShipperProject.log_shipper_core.plugins.pluginsFactorys;
 using Serilog;
 
-namespace log_shipper.pipeline
+namespace LogShipperProject.pipeline
 {
     public class OutputFactory : ICreatable
     {

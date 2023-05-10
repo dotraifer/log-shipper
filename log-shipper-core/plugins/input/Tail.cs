@@ -1,5 +1,5 @@
-﻿using log_shipper.pipeline;
-using log_shipper.pipeline.pipelines;
+﻿using LogShipperProject.pipeline;
+using LogShipperProject.pipeline.pipelines;
 using Serilog;
 using Serilog.Events;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.plugins.input.plugins
+namespace LogShipperProject.plugins.input.plugins
 {
     public class Tail : Input
     {

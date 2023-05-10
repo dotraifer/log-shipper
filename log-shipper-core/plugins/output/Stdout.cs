@@ -1,4 +1,4 @@
-﻿using log_shipper.pipeline.pipelines;
+﻿using LogShipperProject.pipeline.pipelines;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.log_shipper_core.plugins.output
+namespace LogShipperProject.log_shipper_core.plugins.output
 {
     public class Stdout : Output
     {

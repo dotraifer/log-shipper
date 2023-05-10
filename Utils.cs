@@ -12,7 +12,7 @@ using System.Reflection;
 using Serilog;
 using YamlDotNet.Serialization.NodeDeserializers;
 
-namespace log_shipper
+namespace LogShipperProject
 {
     class Utils
     {
@@ -35,8 +35,8 @@ namespace log_shipper
             catch (FileNotFoundException ex) 
             {
                 Logger.Error("configuration file not fount in {0} ", yamlFilePath);
+                throw;
             }
-            return null;
 
         }
     }

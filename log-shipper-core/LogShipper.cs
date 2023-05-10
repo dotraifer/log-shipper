@@ -1,5 +1,5 @@
-﻿using log_shipper;
-using log_shipper.pipeline;
+﻿using LogShipperProject;
+using LogShipperProject.pipeline;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Dynamic;
 using System.Xml.Linq;
 using YamlDotNet.Core;
 
-namespace log_shipper
+namespace LogShipperProject
 {
     /// <summary>
     /// The log shipper object

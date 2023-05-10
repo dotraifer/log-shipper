@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Dynamic;
 using System.Collections;
 
-namespace log_shipper.pipeline
+namespace LogShipperProject.pipeline
 {
     public abstract class Pipeline
     {

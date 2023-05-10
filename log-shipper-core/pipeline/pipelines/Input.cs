@@ -1,4 +1,4 @@
-﻿using log_shipper.plugins.input;
+﻿using LogShipperProject.plugins.input;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.pipeline.pipelines
+namespace LogShipperProject.pipeline.pipelines
 {
     /// <summary>
     /// Input pipeline object

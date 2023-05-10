@@ -1,4 +1,4 @@
-﻿using log_shipper.pipeline.pipelines;
+﻿using LogShipperProject.pipeline.pipelines;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.log_shipper_core.plugins.filter
+namespace LogShipperProject.log_shipper_core.plugins.filter
 {
     public class Modify : Filter
     {
