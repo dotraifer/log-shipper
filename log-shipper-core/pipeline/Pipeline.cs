@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Dynamic;
 using System.Collections;
+using static System.Net.Mime.MediaTypeNames;
+using System.IO.Enumeration;
 
 namespace LogShipperProject.pipeline
 {
@@ -58,8 +60,7 @@ namespace LogShipperProject.pipeline
 
         public bool ChackMatch(Event eventLog)
         {
-            string tag = eventLog.Tag;
-            return eventLog.Tag.Equals(this.Match) ? true : false;
+            return FileSystemName.MatchesSimpleExpression(this.Match, eventLog.Tag);
         }
     }
 }

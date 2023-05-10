@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogShipperProject.plugins.input.plugins
 {
-    public class Tail : Input
+    public sealed class Tail : Input
     {
         protected string path;
         public Tail(Dictionary<object,object> pipelineConfiguration) : base(pipelineConfiguration)
@@ -29,7 +29,6 @@ namespace LogShipperProject.plugins.input.plugins
         public override async Task Run(Event logEvent)
         {
             await MonitorLogFileAsync();
-
         }
         public async Task MonitorLogFileAsync()
         {

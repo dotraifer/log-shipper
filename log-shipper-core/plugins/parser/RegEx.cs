@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace LogShipperProject.log_shipper_core.plugins.parser
 {
-    public class RegEx : Parser
+    public sealed class RegEx : Parser
     {
         public RegEx(Dictionary<object, object> pipelineConfiguration) : base(pipelineConfiguration)
         {
@@ -21,7 +21,7 @@ namespace LogShipperProject.log_shipper_core.plugins.parser
         {
             try
             {
-                eventLog = RegexParser(eventLog);
+                eventLog = this.ChackMatch(eventLog) ? RegexParser(eventLog) : eventLog;
             }
             catch (Exception ex)
             {

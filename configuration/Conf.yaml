@@ -6,10 +6,12 @@
 
 parser:
     - type: regex
+      match: fi*
       regex: '^(?<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3})\s+(?<severity>\w+):\s+(?<message>.*)$'
 
 filter:
     - type: modify
+      match: fil*
       add: 
         name: dotan
         age: dotan
