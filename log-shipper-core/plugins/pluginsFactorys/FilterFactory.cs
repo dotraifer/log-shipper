@@ -11,10 +11,10 @@ namespace log_shipper.pipeline
             switch (pluginType.ToLower())
             {
                 case "modify":
-                    Log.Information("Modify plugin created");
+                    Logger.Information("Modify plugin created");
                     return new Modify(pipelineConfiguration);
                 default:
-                    Log.Error("Invalid plugin type specified : {0}.", pluginType.ToLower());
+                    Logger.Error("Invalid plugin type specified : {0}.", pluginType.ToLower());
                     throw new ArgumentException("Invalid plugin type specified.");
             }
         }

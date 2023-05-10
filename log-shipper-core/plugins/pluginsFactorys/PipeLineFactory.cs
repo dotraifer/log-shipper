@@ -31,7 +31,7 @@ namespace log_shipper.pipeline
                 }
                 catch
                 {
-                    Log.Error("Plugin wasn't noted");
+                    Logger.Error("Plugin wasn't noted");
                     throw new Exception("Plugin wasn't noted");
                 }
                 switch (pipelineType.ToLower())
@@ -49,7 +49,7 @@ namespace log_shipper.pipeline
                         OutputFactory outputFactory = new OutputFactory();
                         return outputFactory.Create(pluginType, properties);
                     default:
-                        Log.Error("Invalid pipeline type specified : {0}.", pipelineType.ToLower());
+                        Logger.Error("Invalid pipeline type specified : {0}.", pipelineType.ToLower());
                         throw new ArgumentException("Invalid pipeline type specified.");
                 }
             }

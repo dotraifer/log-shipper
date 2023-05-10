@@ -15,7 +15,7 @@ namespace log_shipper.log_shipper_core.plugins.output
         }
         public override async Task Run(Event eventLog)
         {
-            Log.Debug("start stdout running");
+            Logger.Debug("start stdout running");
             await Console.Out.WriteLineAsync(eventLog.ToString());
         }
     }

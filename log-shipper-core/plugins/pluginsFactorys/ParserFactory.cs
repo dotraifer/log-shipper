@@ -12,10 +12,10 @@ namespace log_shipper.pipeline
             switch (pluginType.ToLower())
             {
                 case "regex":
-                    Log.Information("Regex plugin created");
+                    Logger.Information("Regex plugin created");
                     return new RegEx(pipelineConfiguration);
                 default:
-                    Log.Error("Invalid plugin type specified : {0}.", pluginType.ToLower());
+                    Logger.Error("Invalid plugin type specified : {0}.", pluginType.ToLower());
                     throw new ArgumentException("Invalid plugin type specified.");
             }
         }

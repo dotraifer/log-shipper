@@ -13,7 +13,7 @@ namespace LogShipper
                 WriteTo.
                 Console()
             .CreateLogger();
-            Log.Information("log shipper started");
+            Logger.Information("log shipper started");
 
             log_shipper.LogShipper pe = new log_shipper.LogShipper();
             pe.Start();

@@ -16,19 +16,27 @@ public class EnvironmentVariableNodeDeserializer : INodeDeserializer
         _innerDeserializer = innerDeserializer ?? throw new ArgumentNullException(nameof(innerDeserializer));
     }
 
+    /// <summary>
+    /// Deserilize env varibles in the yaml
+    /// </summary>
+    /// <param name="parser"></param>
+    /// <param name="expectedType"></param>
+    /// <param name="nestedObjectDeserializer"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public bool Deserialize(IParser parser, Type expectedType, Func<IParser, Type, object> nestedObjectDeserializer, out object value)
     {
         if (_innerDeserializer.Deserialize(parser, expectedType, nestedObjectDeserializer, out value))
         {
             if (value is string stringValue)
             {
-                MatchCollection match = Regex.Matches(stringValue, @"\${\b\w+\b}");
-                foreach (Match match2 in match)
+                MatchCollection matches = Regex.Matches(stringValue, @"\${\b\w+\b}");
+                foreach (Match match in matches)
                 {
-                    string env_var = match2.Value.Substring(2, (match2.Value.Length) - 3);
+                    string env_var = match.Value.Substring(2, (match.Value.Length) - 3);
                     Console.WriteLine(Environment.GetEnvironmentVariable(env_var));
                     Console.WriteLine(env_var);
-                    value = match2.Value.Replace(env_var, Environment.GetEnvironmentVariable(env_var) ?? "NO_ENV_FOUND");
+                    value = match.Value.Replace(env_var, Environment.GetEnvironmentVariable(env_var) ?? "NO_ENV_FOUND");
                 }
             }
             return true;

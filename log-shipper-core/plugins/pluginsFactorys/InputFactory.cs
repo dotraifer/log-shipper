@@ -25,10 +25,10 @@ namespace log_shipper.plugins.input
             switch (pluginType.ToLower())
             {
                 case "tail":
-                    Log.Information("Tail plugin created");
+                    Logger.Information("Tail plugin created");
                     return new Tail(pipelineConfiguration);
                 default:
-                    Log.Error("Invalid plugin type specified : {0}.", pluginType.ToLower());
+                    Logger.Error("Invalid plugin type specified : {0}.", pluginType.ToLower());
                     throw new ArgumentException("Invalid plugin type specified.");
             }
         }

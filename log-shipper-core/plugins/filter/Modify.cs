@@ -16,7 +16,7 @@ namespace log_shipper.log_shipper_core.plugins.filter
         }
         public override async Task Run(Event eventLog)
         {
-            Log.Debug("start modify running");
+            Logger.Debug("start modify running");
             try
             {
                 eventLog = ModifyLog(eventLog);
@@ -24,7 +24,8 @@ namespace log_shipper.log_shipper_core.plugins.filter
             catch (Exception ex)
             {
                 // TODO: Catch actual exceptions
-                await Console.Out.WriteLineAsync(ex.ToString());
+                Logger.Error("Log modification failed");
+                throw;
             }
             // send to all next pipliens
             foreach (var pipeline in this.NextPipelines)

@@ -11,10 +11,10 @@ namespace log_shipper.pipeline
             switch (pluginType.ToLower())
             {
                 case "stdout":
-                    Log.Debug("Stdout plugin created");
+                    Logger.Debug("Stdout plugin created");
                     return new Stdout(pipelineConfiguration);
                 default:
-                    Log.Error("Invalid plugin type specified : {0}.", pluginType.ToLower());
+                    Logger.Error("Invalid plugin type specified : {0}.", pluginType.ToLower());
                     throw new ArgumentException("Invalid plugin type specified.");
             }
         }

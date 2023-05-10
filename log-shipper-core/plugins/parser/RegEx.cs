@@ -25,7 +25,8 @@ namespace log_shipper.log_shipper_core.plugins.parser
             }
             catch (Exception ex)
             {
-                Log.Error("RegexParserFailed");
+                Logger.Error("RegexParserFailed");
+                throw;
             }
             foreach (var pipeline in this.NextPipelines)
             {

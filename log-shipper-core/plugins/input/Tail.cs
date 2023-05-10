@@ -15,7 +15,15 @@ namespace log_shipper.plugins.input.plugins
         protected string path;
         public Tail(Dictionary<object,object> pipelineConfiguration) : base(pipelineConfiguration)
         {
-            this.path = (string)pipelineConfiguration["path"];
+            try
+            {
+                this.path = (string)pipelineConfiguration["path"];
+            }
+            catch(Exception ex)
+            {
+                Logger.Error("No path label defined for tail plugin");
+                throw;
+            }
         }
 
         public override async Task Run(Event logEvent)
