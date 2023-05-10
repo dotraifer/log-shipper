@@ -6,7 +6,7 @@ using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper
+namespace LogShipperProject
 {
     /// <summary>
     /// Object reprasanting an event message
@@ -14,7 +14,7 @@ namespace log_shipper
     public class Event
     {
         private DateTime Date { get; set; }
-        private string Tag { get; set; }
+        public string Tag { get; set; }
         public readonly Dictionary<string, object> LogData = new Dictionary<string, object>();
         public Event(string tag)
         {

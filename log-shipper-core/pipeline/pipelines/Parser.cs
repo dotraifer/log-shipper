@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.pipeline.pipelines
+namespace LogShipperProject.pipeline.pipelines
 {
     public abstract class Parser : Pipeline
     {

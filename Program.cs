@@ -1,9 +1,9 @@
-﻿using log_shipper;
-using log_shipper.pipeline;
+﻿using LogShipperProject;
+using LogShipperProject.pipeline;
 using Serilog;
 using System;
 
-namespace log_shipper
+namespace LogShipperProject
 {
     public class Program
     {
@@ -15,8 +15,8 @@ namespace log_shipper
             .CreateLogger();
             Logger.Information("log shipper started");
 
-            LogShipper pe = new LogShipper();
-            pe.Start();
+            LogShipper logShipper = new LogShipper();
+            logShipper.Start();
 
 
         }

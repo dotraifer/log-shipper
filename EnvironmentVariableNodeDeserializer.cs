@@ -1,4 +1,4 @@
-﻿using log_shipper.pipeline.pipelines;
+﻿using LogShipperProject.pipeline.pipelines;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -31,12 +31,13 @@ public class EnvironmentVariableNodeDeserializer : INodeDeserializer
             if (value is string stringValue)
             {
                 MatchCollection matches = Regex.Matches(stringValue, @"\${\b\w+\b}");
+                // for every env varible pattern
                 foreach (Match match in matches)
                 {
-                    string env_var = match.Value.Substring(2, (match.Value.Length) - 3);
-                    Console.WriteLine(Environment.GetEnvironmentVariable(env_var));
-                    Console.WriteLine(env_var);
-                    value = match.Value.Replace(env_var, Environment.GetEnvironmentVariable(env_var) ?? "NO_ENV_FOUND");
+                    // get the env name
+                    string envVarible = match.Value.Substring(2, (match.Value.Length) - 3);
+                    // replace the env with his value
+                    value = ((string)value).Replace(match.Value, Environment.GetEnvironmentVariable(envVarible) ?? "NO_ENV_FOUND");
                 }
             }
             return true;

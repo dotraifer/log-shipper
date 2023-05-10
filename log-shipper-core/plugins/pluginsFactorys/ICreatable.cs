@@ -1,11 +1,11 @@
-﻿using log_shipper.pipeline;
+﻿using LogShipperProject.pipeline;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.log_shipper_core.plugins.pluginsFactorys
+namespace LogShipperProject.log_shipper_core.plugins.pluginsFactorys
 {
     public interface ICreatable
     {

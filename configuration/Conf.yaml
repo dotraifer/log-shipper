@@ -1,15 +1,17 @@
 ﻿input: 
     - type: tail
       path: C:\Users\dotan\log-shipper-test\log.txt
-      tag: file
+      tag: vm.${HOSTNAME}
 
 
 parser:
     - type: regex
+      match: vm.*
       regex: '^(?<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3})\s+(?<severity>\w+):\s+(?<message>.*)$'
 
 filter:
     - type: modify
+      match: vm.*
       add: 
         name: dotan
         age: dotan

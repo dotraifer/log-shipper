@@ -1,4 +1,4 @@
-﻿using log_shipper.pipeline.pipelines;
+﻿using LogShipperProject.pipeline.pipelines;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.log_shipper_core.plugins.filter
+namespace LogShipperProject.log_shipper_core.plugins.filter
 {
-    public class Modify : Filter
+    public sealed class Modify : Filter
     {
         public Modify(Dictionary<object, object> pipelineConfiguration) : base(pipelineConfiguration)
         {
@@ -19,7 +19,7 @@ namespace log_shipper.log_shipper_core.plugins.filter
             Logger.Debug("start modify running");
             try
             {
-                eventLog = ModifyLog(eventLog);
+                eventLog = this.ChackMatch(eventLog) ? ModifyLog(eventLog) : eventLog;
             }
             catch (Exception ex)
             {
@@ -48,6 +48,8 @@ namespace log_shipper.log_shipper_core.plugins.filter
                 switch ((modifier.ToLower()))
                 {
                     case "type":
+                        break;
+                    case "match":
                         break;
                     case "add":
                         eventLog = Add(eventLog, field.Value);

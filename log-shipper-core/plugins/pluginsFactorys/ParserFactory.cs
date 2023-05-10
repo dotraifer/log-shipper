@@ -1,9 +1,9 @@
-﻿using log_shipper.log_shipper_core.plugins.parser;
-using log_shipper.log_shipper_core.plugins.pluginsFactorys;
-using log_shipper.plugins.input.plugins;
+﻿using LogShipperProject.log_shipper_core.plugins.parser;
+using LogShipperProject.log_shipper_core.plugins.pluginsFactorys;
+using LogShipperProject.plugins.input.plugins;
 using Serilog;
 
-namespace log_shipper.pipeline
+namespace LogShipperProject.pipeline
 {
     public class ParserFactory : ICreatable
     {

@@ -1,8 +1,8 @@
-﻿using log_shipper.log_shipper_core.plugins.filter;
-using log_shipper.log_shipper_core.plugins.pluginsFactorys;
+﻿using LogShipperProject.log_shipper_core.plugins.filter;
+using LogShipperProject.log_shipper_core.plugins.pluginsFactorys;
 using Serilog;
 
-namespace log_shipper.pipeline
+namespace LogShipperProject.pipeline
 {
     public class FilterFactory : ICreatable
     {

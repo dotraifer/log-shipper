@@ -1,4 +1,4 @@
-﻿using log_shipper.pipeline.pipelines;
+﻿using LogShipperProject.pipeline.pipelines;
 using Serilog;
 using Serilog.Events;
 using System;
@@ -10,9 +10,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace log_shipper.log_shipper_core.plugins.parser
+namespace LogShipperProject.log_shipper_core.plugins.parser
 {
-    public class RegEx : Parser
+    public sealed class RegEx : Parser
     {
         public RegEx(Dictionary<object, object> pipelineConfiguration) : base(pipelineConfiguration)
         {
@@ -21,7 +21,7 @@ namespace log_shipper.log_shipper_core.plugins.parser
         {
             try
             {
-                eventLog = RegexParser(eventLog);
+                eventLog = this.ChackMatch(eventLog) ? RegexParser(eventLog) : eventLog;
             }
             catch (Exception ex)
             {

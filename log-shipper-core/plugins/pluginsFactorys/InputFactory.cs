@@ -1,6 +1,6 @@
-﻿using log_shipper.log_shipper_core.plugins.pluginsFactorys;
-using log_shipper.pipeline;
-using log_shipper.plugins.input.plugins;
+﻿using LogShipperProject.log_shipper_core.plugins.pluginsFactorys;
+using LogShipperProject.pipeline;
+using LogShipperProject.plugins.input.plugins;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace log_shipper.plugins.input
+namespace LogShipperProject.plugins.input
 {
     public class InputFactory : ICreatable
     {
