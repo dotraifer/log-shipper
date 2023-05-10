@@ -3,7 +3,7 @@ using log_shipper.pipeline;
 using Serilog;
 using System;
 
-namespace LogShipper
+namespace log_shipper
 {
     public class Program
     {
@@ -15,7 +15,7 @@ namespace LogShipper
             .CreateLogger();
             Logger.Information("log shipper started");
 
-            log_shipper.LogShipper pe = new log_shipper.LogShipper();
+            LogShipper pe = new LogShipper();
             pe.Start();
 
 
