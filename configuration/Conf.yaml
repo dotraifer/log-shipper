@@ -14,7 +14,7 @@ filter:
         name: dotan
         age: dotan
       set:
-        host: ${HOSTNAME}
+        host: vm.${HOSTNAME}
       remove:
         - parser
     
