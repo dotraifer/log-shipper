@@ -31,12 +31,13 @@ public class EnvironmentVariableNodeDeserializer : INodeDeserializer
             if (value is string stringValue)
             {
                 MatchCollection matches = Regex.Matches(stringValue, @"\${\b\w+\b}");
+                // for every env varible pattern
                 foreach (Match match in matches)
                 {
+                    // get the env name
                     string envVarible = match.Value.Substring(2, (match.Value.Length) - 3);
-                    Console.WriteLine(match.Value + " hello " + envVarible);
+                    // replace the env with his value
                     value = ((string)value).Replace(match.Value, Environment.GetEnvironmentVariable(envVarible) ?? "NO_ENV_FOUND");
-                    Console.WriteLine(value);
                 }
             }
             return true;
