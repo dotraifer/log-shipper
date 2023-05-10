@@ -12,15 +12,9 @@ namespace log_shipper.pipeline
     {
         protected List<Pipeline> NextPipelines { get; set; }
         protected Dictionary<object, object> PipelineConfiguration { get; set; }
-        protected string type;
-        /// <summary>
-        /// Add a pipeline object to the nextPipeline List
-        /// </summary>
-        /// <param name="nextPipeline">object of the next pipeline stops</param>
-        public void AddNextLogger(Pipeline nextPipeline)
-        {
-            this.NextPipelines.Add(nextPipeline);
-        }
+        protected string Type;
+        protected string Match;
+
         /// <summary>
         /// pipe constuctor
         /// </summary>
@@ -28,8 +22,32 @@ namespace log_shipper.pipeline
         protected Pipeline(Dictionary<object, object> pipelineConfiguration)
         {
             this.PipelineConfiguration = pipelineConfiguration;
-            this.type = (string)PipelineConfiguration["type"];
+            try
+            {
+                this.Type = (string)PipelineConfiguration["type"];
+            }
+            catch (Exception ex) {
+                Logger.Error("Type was not defined");
+                throw;
+            }
+            try
+            {
+                this.Match = (string)PipelineConfiguration["match"];
+            }
+            catch (Exception ex)
+            {
+                this.Match = "*";
+            }
             this.NextPipelines = new List<Pipeline>();
+        }
+
+        /// <summary>
+        /// Add a pipeline object to the nextPipeline List
+        /// </summary>
+        /// <param name="nextPipeline">object of the next pipeline stops</param>
+        public void AddNextPipelines(Pipeline nextPipeline)
+        {
+            this.NextPipelines.Add(nextPipeline);
         }
 
         /// <summary>
@@ -37,5 +55,11 @@ namespace log_shipper.pipeline
         /// </summary>
         /// <param name="eventLog">The log object</param>
         public abstract Task Run(Event eventLog);
+
+        public bool ChackMatch(Event eventLog)
+        {
+            string tag = eventLog.Tag;
+            return eventLog.Tag.Equals(this.Match) ? true : false;
+        }
     }
 }

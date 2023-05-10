@@ -19,22 +19,22 @@ namespace log_shipper
         /// <summary>
         /// parsing a yaml file to a dynamic object
         /// </summary>
-        /// <param name="YamlFilePath">path to the yaml configuration file</param>
+        /// <param name="yamlFilePath">path to the yaml configuration file</param>
         /// <returns>the dynamic object - ExpandoObject</returns>
-        public static ExpandoObject YamlParser(string YamlFilePath)
+        public static ExpandoObject YamlParser(string yamlFilePath)
         {
 
             // Deserialize the YAML file into a dynamic object
             var deserializer = new DeserializerBuilder().WithNodeDeserializer(inner => new EnvironmentVariableNodeDeserializer(inner), s => s.InsteadOf<ScalarNodeDeserializer>()).Build();
             try
             {
-                var yamlString = File.ReadAllText(YamlFilePath);
+                var yamlString = File.ReadAllText(yamlFilePath);
                 var dynamicObject = deserializer.Deserialize<ExpandoObject>(yamlString);
                 return dynamicObject;
             }
             catch (FileNotFoundException ex) 
             {
-                Logger.Error("configuration file not fount in {0} ", YamlFilePath);
+                Logger.Error("configuration file not fount in {0} ", yamlFilePath);
             }
             return null;
 

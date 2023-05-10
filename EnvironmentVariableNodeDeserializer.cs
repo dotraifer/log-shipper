@@ -33,10 +33,10 @@ public class EnvironmentVariableNodeDeserializer : INodeDeserializer
                 MatchCollection matches = Regex.Matches(stringValue, @"\${\b\w+\b}");
                 foreach (Match match in matches)
                 {
-                    string env_var = match.Value.Substring(2, (match.Value.Length) - 3);
-                    Console.WriteLine(Environment.GetEnvironmentVariable(env_var));
-                    Console.WriteLine(env_var);
-                    value = match.Value.Replace(env_var, Environment.GetEnvironmentVariable(env_var) ?? "NO_ENV_FOUND");
+                    string envVarible = match.Value.Substring(2, (match.Value.Length) - 3);
+                    Console.WriteLine(Environment.GetEnvironmentVariable(envVarible));
+                    Console.WriteLine(envVarible);
+                    value = match.Value.Replace(envVarible, Environment.GetEnvironmentVariable(envVarible) ?? "NO_ENV_FOUND");
                 }
             }
             return true;

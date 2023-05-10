@@ -15,10 +15,10 @@ namespace log_shipper
     /// </summary>
     public class LogShipper
     {
-        private readonly List<Pipeline> inputs = new List<Pipeline>();
-        private readonly List<Pipeline> parsers = new List<Pipeline>();
-        private readonly List<Pipeline> filters = new List<Pipeline>();
-        private readonly List<Pipeline> outputs = new List<Pipeline>();
+        private readonly List<Pipeline> Inputs = new List<Pipeline>();
+        private readonly List<Pipeline> Parsers = new List<Pipeline>();
+        private readonly List<Pipeline> Filters = new List<Pipeline>();
+        private readonly List<Pipeline> Outputs = new List<Pipeline>();
         public LogShipper() {
             ExpandoObject
                 keyValuePairs = Utils.YamlParser("C:\\Users\\dotan\\source\\repos\\log-shipper\\configuration\\Conf.yaml");
@@ -40,7 +40,7 @@ namespace log_shipper
         /// </summary>
         public void Start()
         {
-            foreach(var input in this.inputs)
+            foreach(var input in this.Inputs)
             {
                 Task.Run(() => input.Run(eventLog: null));
                 Console.ReadLine();
@@ -57,16 +57,16 @@ namespace log_shipper
             switch (propertyName)
             {
                 case "input":
-                    this.inputs.Add(pipeline);
+                    this.Inputs.Add(pipeline);
                     break;
                 case "parser":
-                    this.parsers.Add(pipeline);
+                    this.Parsers.Add(pipeline);
                     break;
                 case "filter":
-                    this.filters.Add(pipeline);
+                    this.Filters.Add(pipeline);
                     break;
                 case "output":
-                    this.outputs.Add(pipeline);
+                    this.Outputs.Add(pipeline);
                     break;
             }
         }
@@ -87,10 +87,10 @@ namespace log_shipper
         /// </summary>
         public void DeterminaiteInputsChain()
         {
-            foreach (var input in this.inputs)
+            foreach (var input in this.Inputs)
             {
                 // all the inputs will always send to first parser
-                input.AddNextLogger(this.parsers[0]);
+                input.AddNextPipelines(this.Parsers[0]);
             }
         }
         /// <summary>
@@ -98,25 +98,25 @@ namespace log_shipper
         /// </summary>
         public void DeterminiteParsersChain()
         {
-            for (int i = 0; i < this.parsers.Count - 1; i++)
+            for (int i = 0; i < this.Parsers.Count - 1; i++)
             {
-                parsers[i].AddNextLogger(parsers[i + 1]);
+                Parsers[i].AddNextPipelines(Parsers[i + 1]);
             }
-            parsers[parsers.Count - 1].AddNextLogger(this.filters[0]);
+            Parsers[Parsers.Count - 1].AddNextPipelines(this.Filters[0]);
         }
         /// <summary>
         /// determinaite the filters chain
         /// </summary>
         public void DeterminiteFiltersChain()
         {
-            for (int i = 0; i < this.filters.Count - 1; i++)
+            for (int i = 0; i < this.Filters.Count - 1; i++)
             {
-                filters[i].AddNextLogger(filters[i + 1]);
+                Filters[i].AddNextPipelines(Filters[i + 1]);
             }
 
-            foreach (var output in this.outputs)
+            foreach (var output in this.Outputs)
             {
-                filters[filters.Count - 1].AddNextLogger(output);
+                Filters[Filters.Count - 1].AddNextPipelines(output);
             }
         }
     }

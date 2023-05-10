@@ -15,8 +15,8 @@ namespace log_shipper
             .CreateLogger();
             Logger.Information("log shipper started");
 
-            LogShipper pe = new LogShipper();
-            pe.Start();
+            LogShipper logShipper = new LogShipper();
+            logShipper.Start();
 
 
         }
